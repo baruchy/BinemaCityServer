@@ -16,37 +16,35 @@ module.exports = {
             if (!user) {
                 return res.status(404).send('Incorrect username or password');
             }
-            console.log(user.fname, 'connected to the store');
             return res.json(user);
         });
     },
     register: (req, res) => {
         let user = req.body;
-        console.log('user-----' + JSON.stringify(user));
         let u = new User(user);
         
         var error = u.validateSync();
         if(error) {
-        	console.log('errors');
         	if (error.name == 'ValidationError') {
             	let message = '';
                 for (field in error.errors) {
-                    console.log(error.errors[field].message);
                     message = message + error.errors[field].message + '\n';
                 }
             	return res.status(404).send(message);
             }
         }
-        console.log('1');
-        u.save((err, user) => {
-        	console.log('2');
-        	if (err) {
-        		console.log('3');
+        User.findOne({email: req.body.email}, (err, user) => {
+            if (err) {
             	return res.status(500).send('Bad Request');
             }
-        	console.log('4');
-            console.log(user.fname, 'register to the store');
-            console.log('5');
+            if (user) {
+                return res.status(404).send('User already exists');
+            }
+        });
+        u.save((err, user) => {
+        	if (err) {
+            	return res.status(500).send('Bad Request');
+            }
             return res.json(user);
         });
     },
