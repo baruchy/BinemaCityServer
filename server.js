@@ -17,7 +17,7 @@ const cors = require('cors');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
-mongoose.connect('mongodb://localhost:27017/blockbuster');
+mongoose.connect('mongodb://localhost:27017/binemacity');
 var port = process.env.PORT || 3000;        // set our port
 
 // ROUTES FOR OUR API

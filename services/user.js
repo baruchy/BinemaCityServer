@@ -75,13 +75,11 @@ module.exports = {
     },
     setMaps: (maps) => {
         maps.forEach(m => {
-            console.log(m);
             let map = new Map({location:m});
             map.save((err, _map) => {
             	if (err) {
                 	return res.status(500).send('Bad Request');
                 }
-                console.log(_map);
                 return true;
             });
         });
@@ -104,7 +102,6 @@ module.exports = {
         });
     },
     delete: (req, res) => {
-        console.log('delete user' + req.params.id);
         let id = req.params.id;
         User.findOne({_id: id}, (err, u) => {
         	if (err) {
@@ -146,7 +143,6 @@ module.exports = {
             }
 
             orders.forEach((o) => {
-                console.log('start 1')
                 o.movies.forEach((p) => {
                     userMovies.push(p);
                     trainData.push({input: p.name, output: 1});
@@ -162,7 +158,6 @@ module.exports = {
                 }
                 allMovies = movies;
                 movies.forEach((p) => {
-                    console.log('start 2')
                     var found = userMovies.filter((up) => {
                         return up._id == p._id;
                     });
