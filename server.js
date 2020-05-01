@@ -79,5 +79,5 @@ db.once('open', function () {
     console.log('Running');
 });
 server.listen(port, () => {
-    console.log('Blockbuster Server listen on port 3000\n\n');
+    console.log('Binema City Server listen on port 3000\n\n');
 });
