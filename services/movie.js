@@ -4,12 +4,10 @@ module.exports = {
     create: (req, res) => {
         let movie = req.body;
         let p = new Movie(movie);
-
         p.save((err, movie) => {
         	if (err) {
             	return res.status(500).send('Bad Request');
             }
-
             res.json(movie);
         });
     },
@@ -35,7 +33,6 @@ module.exports = {
     update: (req, res) => {
         let pId = req.params.id;
         let movie = req.body;
-
         Movie.findOne({_id: pId}, (err, p) => {
         	if (err) {
             	return res.status(500).send('Bad Request');
@@ -50,7 +47,6 @@ module.exports = {
             	if (err) {
                 	return res.status(500).send('Bad Request');
                 }
-
                 res.json(newMovie);
             });
 

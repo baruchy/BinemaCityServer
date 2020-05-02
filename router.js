@@ -28,6 +28,7 @@ router.route('/movies').post(movieService.create);
 router.route('/movies').get(movieService.list);
 router.route('/movies/:id').get(movieService.byId);
 router.route('/movies/:id').put(movieService.update);
+router.route('/movies/:id').delete(movieService.delete);
 router.route('/movieByCategory').get(movieService.groupByCategory);
 
 //http get ( get all, or by id), post(create) put(update) delete

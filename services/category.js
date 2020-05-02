@@ -4,7 +4,6 @@ module.exports = {
     create: (req, res) => {
         let category = req.body;
         let c = new Category(category);
-
         c.save((err, category) => {
         	if (err) {
             	return res.status(500).send('Bad Request');
