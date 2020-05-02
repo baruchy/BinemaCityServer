@@ -20,7 +20,6 @@ router.route('/categories').post(categoryService.create);
 router.route('/categories').get(categoryService.list);
 router.route('/categories/:id').get(categoryService.byId);
 router.route('/categories/:id').put(categoryService.update);
-router.route('/categories/:id').delete(categoryService.delete);
 
 // movies
 router.route('/movies').post(movieService.create);
@@ -46,7 +45,6 @@ router.route('/users').post(userService.register);
 router.route('/users').get(userService.list);
 router.route('/users/:id/orders').get(userService.getUserOrders);
 router.route('/users/:id').put(userService.update);
-router.route('/users/:id').delete(userService.delete);
 router.route('/users/:id/getml').get(userService.getml);
 router.route('/groupByGender').get(userService.groupByGender);
 //MAPS

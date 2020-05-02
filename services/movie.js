@@ -54,21 +54,11 @@ module.exports = {
     },
     delete: (req, res) => {
         let id = req.params.id;
-
-        Movie.findOne({_id: id}, (err, p) => {
+        Movie.deleteOne({_id: id}, (err, p) => {
         	if (err) {
             	return res.status(500).send('Bad Request');
             }
-
-            p.active = false;
-
-            p.save((err, prod) => {
-            	if (err) {
-                	return res.status(500).send('Bad Request');
-                }
-
-                res.json(prod);
-            });
+        	return res.json(p);
         });
 
     },

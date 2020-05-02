@@ -48,26 +48,6 @@ module.exports = {
             });
         });
 
-    },
-    delete: (req, res) => {
-        let catId = req.params.id;
-
-        Category.findOne({_id: catId}, (err, c) => {
-        	if (err) {
-            	return res.status(500).send('Bad Request');
-            }
-
-            c.active = false;
-
-            c.save((err, newCategory) => {
-            	if (err) {
-                	return res.status(500).send('Bad Request');
-                }
-
-                res.json(newCategory);
-            });
-        });
-
     }
 
 

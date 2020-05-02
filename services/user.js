@@ -101,21 +101,6 @@ module.exports = {
             });
         });
     },
-    delete: (req, res) => {
-        let id = req.params.id;
-        User.findOne({_id: id}, (err, u) => {
-        	if (err) {
-            	return res.status(500).send('Bad Request');
-            }
-            u.active = false;
-            u.save((err, user) => {
-            	if (err) {
-                	return res.status(500).send('Bad Request');
-                }
-                res.json(user);
-            });
-        });
-    },
     groupByGender: (req, res) => {
         User.aggregate([
             {
