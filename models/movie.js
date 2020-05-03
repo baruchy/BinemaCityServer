@@ -2,10 +2,21 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const movieSchema= new Schema({
-    name: String,
-    price: Number,
+    name: {
+        type: String,
+        required: [true, 'Movie name is missing'],
+        trim: true
+    },
+    price: {
+        type: Number,
+        required: [true, 'Price is missing']
+    },
     category: {type: Schema.Types.ObjectId, ref: 'Category'},
-    image: String,
+    image: {
+        type: String,
+        required: [true, 'Image url is missing'],
+        trim: true
+    },
     orders: {type: Number, default: 0},
     active: {type: Boolean, default: true}
 });

@@ -6,7 +6,11 @@ const orderSchema = new Schema({
     movies: [{type: Schema.Types.ObjectId, ref: 'Movie'}],
     price: Number,
     order_date: Date,
-    card_digits: String,
+    card_digits: {
+        type: String,
+        required: [true, 'card digits are missing'],
+        trim: true
+    },
     is_bitcoin: {type: Boolean, default: false}
 });
 

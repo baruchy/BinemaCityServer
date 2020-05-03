@@ -32,21 +32,22 @@ module.exports = {
                 }
             	return res.status(404).send(message);
             }
+        } else {
+            User.findOne({email: req.body.email}, (err, user) => {
+                if (err) {
+                    return res.status(500).send('Bad Request');
+                }
+                if (user) {
+                    return res.status(404).send('User already exists');
+                }
+                u.save((err, user) => {
+                    if (err) {
+                        return res.status(500).send('Bad Request');
+                    }
+                    return res.json(user);
+                });
+            });
         }
-        User.findOne({email: req.body.email}, (err, user) => {
-            if (err) {
-            	return res.status(500).send('Bad Request');
-            }
-            if (user) {
-                return res.status(404).send('User already exists');
-            }
-        });
-        u.save((err, user) => {
-        	if (err) {
-            	return res.status(500).send('Bad Request');
-            }
-            return res.json(user);
-        });
     },
     getUserOrders: (req, res) => {
         let id = req.params.id;
