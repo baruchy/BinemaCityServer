@@ -38,9 +38,9 @@ async function checkMaps() {
     map.find((err, maps) => {
         if (err) throw err;
         var locations = [
-            ['Location 1 Name', 'New York, NY', 'Location 1 URL'],
-            ['Location 2 Name', 'Newark, NJ', 'Location 2 URL'],
-            ['Location 3 Name', 'Philadelphia, PA', 'Location 3 URL']
+            ['Binema City NY', 'New York, NY', 'about'],
+            ['Binema City NJ', 'Newark, NJ', 'about'],
+            ['Binema City PA', 'Philadelphia, PA', 'about']
         ];
         if (maps.length == 0) {
             userService.setMaps(locations)
