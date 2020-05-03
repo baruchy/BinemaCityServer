@@ -17,7 +17,11 @@ var UserSchema = new Schema({
       },
     role: {type: String, default: 'user'},
     active: {type: Boolean, default: true},
-    gender: {type: String, default: 'Male'}
+    gender: {type: String,
+        required: [true, 'Gender is missing'],
+        trim: true,
+        default: 'Male'
+    }
 });
 
 module.exports = mongoose.model('User', UserSchema);
