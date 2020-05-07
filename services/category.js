@@ -8,7 +8,7 @@ module.exports = {
         if(error) {
             if (error.name == 'ValidationError') {
                 let message = '';
-                for (field in error.errors) {
+                for (let field in error.errors) {
                     message = message + error.errors[field].message + '\n';
                 }
                 return res.status(404).send(message);
@@ -58,7 +58,7 @@ module.exports = {
         if(error) {
             if (error.name == 'ValidationError') {
                 let message = '';
-                for (field in error.errors) {
+                for (let field in error.errors) {
                     message = message + error.errors[field].message + '\n';
                 }
                 return res.status(404).send(message);

@@ -27,7 +27,7 @@ module.exports = {
         if(error) {
         	if (error.name == 'ValidationError') {
             	let message = '';
-                for (field in error.errors) {
+                for (let field in error.errors) {
                     message = message + error.errors[field].message + '\n';
                 }
             	return res.status(404).send(message);
@@ -148,7 +148,7 @@ module.exports = {
                         return up._id == p._id;
                     });
 
-                    if (!found) {
+                    if (!found.length) {
                         console.log('NOT EXIST ------' + JSON.stringify(p));
                         //trainData.push({input: {name: p.name, price: p.price}, output: {goodMovie: 0}});
                         //trainData.push({input: [p.price], output: [0]});

@@ -107,7 +107,7 @@ module.exports = {
                     }
                 })
             });
-            var max = Object.keys(allprods).reduce((a, b) => allprods[a] > allprods[b] ? a : b);
+            Object.keys(allprods).reduce((a, b) => allprods[a] > allprods[b] ? a : b);
         });
     },
 
