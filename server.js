@@ -6,10 +6,15 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const userService = require('./services/user');
 const map = require('./models/map');
+const router = require('./routers/router');
+const usersRouter = require('./routers/users.router');
+const ordersRouter = require('./routers/orders.router');
+const moviesRouter = require('./routers/movies.router');
+const categoriesRouter = require('./routers/categories.router');
+const mapsRouter = require('./routers/maps.router');
 
 const server = http.createServer(app);
 const io = require('socket.io').listen(server);
-const cors = require('cors');
 
 
 // configure app to use bodyParser()
@@ -17,12 +22,20 @@ const cors = require('cors');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
-mongoose.connect('mongodb://localhost:27017/binemacity');
+this.getMongoConnectionConfig = function () {
+    return {'useNewUrlParser': true,
+        'useFindAndModify': false,
+        'useCreateIndex': true,
+        'useUnifiedTopology': true
+    };
+}
+
+mongoose.connect('mongodb://localhost:27017/binemacity', this.getMongoConnectionConfig());
 var port = process.env.PORT || 3000;        // set our port
 
 // ROUTES FOR OUR API
 // =============================================================================
-const router = require('./router');            // get an instance of the express Router
+
 var numOusers = 0;
 // test route to make sure everything is working (accessed at GET http://localhost:8080/api)
 router.get('/', function (req, res) {
@@ -30,9 +43,14 @@ router.get('/', function (req, res) {
 });
 
 // REGISTER OUR ROUTES -------------------------------
-// all of our routes will be prefixed with /api
-app.use('/api', router);
+// all of our routers will be prefixed with /api
 
+app.use('/api', router);
+app.use('/api',usersRouter)
+app.use('/api',ordersRouter)
+app.use('/api',moviesRouter)
+app.use('/api',categoriesRouter)
+app.use('/api',mapsRouter)
 
 async function checkMaps() {
     map.find((err, maps) => {
