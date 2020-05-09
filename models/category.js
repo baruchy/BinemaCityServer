@@ -3,6 +3,7 @@ const Schema = mongoose.Schema;
 
 const categorySchema = new Schema({
     name: {
+        unique: [true, 'Çategory with same name already exists'],
         type: String,
         required: [true, 'Category name is missing'],
         trim: true
