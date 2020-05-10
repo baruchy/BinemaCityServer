@@ -5,10 +5,11 @@ const populateResponse = (res, result) => {
         return res.status(200).json(result.data);
     }
     if (!result.isValid) {
-        return res.status(400).json(result.message);
+        res.status(400);
     } else {
-        return res.status(500).json(result.message);
+        res.status(500);
     }
+    return res.json(result.message);
 }
 
 const populateInternalErrorResponse = (res, message ='Internal error, please try again later') => {
