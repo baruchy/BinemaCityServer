@@ -1,6 +1,6 @@
 const express = require('express');
 const ordersRouter = express.Router();
-const orderService = require('../services/order');
+const orderService = require('../controllers/order.controller');
 
 
 ordersRouter.route('/orders').get(orderService.list);

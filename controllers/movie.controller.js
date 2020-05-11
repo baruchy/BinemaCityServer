@@ -1,9 +1,43 @@
-const Movie = require('../models/movie');
+const movieDao = require('../daos/movie.dao');
+const apiHandler = require('../services/api.handler');
+
+const create = async (req, res) => {
+    return await apiHandler.handleCreate(req, res, movieDao);
+}
+
+const list = async (req, res) => {
+    return await apiHandler.handleList(res, movieDao);
+}
+
+const byId = async (req, res) => {
+    return await apiHandler.handleGetById(req, res, movieDao);
+}
+
+const update = async (req, res) => {
+    return await apiHandler.handleUpdate(req, res, movieDao);
+}
+
+const removeById = async (req, res) => {
+    return await apiHandler.handleRemove(req, res, movieDao);
+}
+
+const groupBy = async (req, res) => {
+    return await apiHandler.handleGroupBy(req, res, movieDao);
+}
+
+
+module.exports = { create, list, byId, update, removeById, groupBy };
+
+
+
+
+/*
+const MovieController = require('../models/movie');
 
 module.exports = {
     create: (req, res) => {
         let movie = req.body;
-        let p = new Movie(movie);
+        let p = new MovieController(movie);
 
         var error = p.validateSync();
         if(error) {
@@ -24,7 +58,7 @@ module.exports = {
         }
     },
     list: (req, res) => {  
-        Movie.find().populate('category', 'name').exec((err, movies) => {
+        MovieController.find().populate('category', 'name').exec((err, movies) => {
         	if (err) {
             	return res.status(500).send('Bad Request');
             }
@@ -34,7 +68,7 @@ module.exports = {
     byId: (req, res) => {
         let pId = req.params.id;
 
-        Movie.findOne({_id: pId}).populate('category', 'name').exec((err, movie) => {
+        MovieController.findOne({_id: pId}).populate('category', 'name').exec((err, movie) => {
         	if (err) {
             	return res.status(500).send('Bad Request');
             }
@@ -45,7 +79,7 @@ module.exports = {
     update: (req, res) => {
         let pId = req.params.id;
         let movie = req.body;
-        let p = new Movie(movie);
+        let p = new MovieController(movie);
         var error = p.validateSync();
         if(error) {
             if (error.name == 'ValidationError') {
@@ -57,7 +91,7 @@ module.exports = {
             }
         } else {
 
-            Movie.findOne({_id: pId}, (err, p) => {
+            MovieController.findOne({_id: pId}, (err, p) => {
                 if (err) {
                     return res.status(500).send('Bad Request');
                 }
@@ -79,7 +113,7 @@ module.exports = {
     },
     delete: (req, res) => {
         let id = req.params.id;
-        Movie.deleteOne({_id: id}, (err, p) => {
+        MovieController.deleteOne({_id: id}, (err, p) => {
         	if (err) {
             	return res.status(500).send('Bad Request');
             }
@@ -89,7 +123,7 @@ module.exports = {
     },
 
     groupByCategory: (req, res) => {
-        Movie.aggregate(
+        MovieController.aggregate(
             [{
                 $group: {
                     _id:  "$category",
@@ -106,3 +140,4 @@ module.exports = {
 
 
 };
+*/

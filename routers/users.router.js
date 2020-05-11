@@ -1,6 +1,6 @@
 const express = require('express');
 const usersRouter = express.Router();
-const userService = require('../services/user');
+const userService = require('../controllers/user');
 
 
 usersRouter.route('/users').get(userService.list);

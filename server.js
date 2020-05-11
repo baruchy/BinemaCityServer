@@ -28,12 +28,12 @@ const app = express();
 app.get('/', (req, res) => { res.send('OK') });
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
-app.use('/api', router);
-app.use('/api',usersRouter)
-app.use('/api',ordersRouter)
-app.use('/api',moviesRouter)
-app.use('/api',categoriesRouter)
-app.use('/api',mapsRouter)
+app.use('/api/v1', router);
+app.use('/api/v1',usersRouter)
+app.use('/api/v1',ordersRouter)
+app.use('/api/v1',moviesRouter)
+app.use('/api/v1',categoriesRouter)
+app.use('/api/v1',mapsRouter)
 
 const http = require('http');
 const server = http.createServer(app).listen(3000, () => { console.log('listening on 3000') });

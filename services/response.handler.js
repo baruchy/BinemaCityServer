@@ -1,8 +1,8 @@
 
 
-const populateResponse = (res, result) => {
+const populateResponse = (res, result, successCode = 200) => {
     if (result.success) {
-        return res.status(200).json(result.data);
+        return res.status(successCode).json(result.data);
     }
     if (!result.isValid) {
         res.status(400);

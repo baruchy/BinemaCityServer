@@ -1,7 +1,7 @@
 const express = require('express');
 const mapsRouter = express.Router();
 // Todo add new service
-const userService = require('../services/user');
+const userService = require('../controllers/user');
 
 
 // Todo rename urls

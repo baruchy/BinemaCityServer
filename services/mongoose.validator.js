@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
-const validateSchemaModel = async (categoryModel) => {
-    let error = categoryModel.validateSync();
+const validateSchemaModel = async (model) => {
+    let error = model.validateSync();
     if (error) {
         var errorMessage = '';
         if (error.name == 'ValidationError') {
@@ -14,11 +14,18 @@ const validateSchemaModel = async (categoryModel) => {
     return {success: true, isValid: true};
 }
 
-const validateID = async (categoryID) => {
-    if (!mongoose.Types.ObjectId.isValid(categoryID)){
+const validateID = async (objectID) => {
+    if (!mongoose.Types.ObjectId.isValid(objectID)){
         return {success: false, isValid: false, message: 'DB error: invalid ObjectID'};
     }
     return {success: true, isValid: true};
 }
 
-module.exports= {validateSchemaModel, validateID};
+const validateGroupByData = async (groupBy) => {
+    if (!groupBy || !groupBy.field){
+        return {success: false, isValid: false, message: 'Missing groupby field'};
+    }
+    return {success: true, isValid: true};
+}
+
+module.exports= {validateSchemaModel, validateID, validateGroupByData};
