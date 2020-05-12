@@ -1,15 +1,14 @@
 const express = require('express');
 const usersRouter = express.Router();
-const userService = require('../controllers/user');
+const userController = require('../controllers/user.controller');
 
-
-usersRouter.route('/users').get(userService.list);
-usersRouter.route('/users/:id').put(userService.update);
-usersRouter.route('/users').post(userService.register);
-usersRouter.route('/users/:id/orders').get(userService.getUserOrders);
-usersRouter.route('/users/:id').put(userService.update);
-// Todo rename urls
-usersRouter.route('/users/:id/getml').get(userService.getml);
-usersRouter.route('/groupByGender').get(userService.groupByGender);
+usersRouter.route('/users').post(userController.create);
+usersRouter.route('/users').get(userController.list);
+usersRouter.route('/users/:id').get(userController.byId);
+usersRouter.route('/users/:id/orders').get(userController.getOrders);
+usersRouter.route('/users/search/query').get(userController.query);
+usersRouter.route('/users/groupBy/:field').get(userController.groupBy);
+usersRouter.route('/users/:id').put(userController.update);
+usersRouter.route('/users/:id').delete(userController.removeById);
 
 module.exports = usersRouter;

@@ -1,5 +1,5 @@
 const Category = require('../models/category');
-const objectDocumentMapper = require('../odm/object.document.mapper');
+const objectDocumentMapper = require('../services/object.document.mapper');
 
 
 const create = async (category) => {
@@ -15,12 +15,11 @@ const query = async (categoryQuery) => {
 }
 
 const update = async (categoryID, category) => {
-    return objectDocumentMapper.update(categoryID,category, Category, 'Category name already exists');
+    return objectDocumentMapper.update(categoryID, category, Category, 'Category name already exists');
 }
 
-const remove = async (categoryID) => {
+const removeById = async (categoryID) => {
     return objectDocumentMapper.remove(categoryID, Category);
 }
 
-
-module.exports= { create, findById, query, update, remove };
+module.exports = {create, findById, query, update, removeById};

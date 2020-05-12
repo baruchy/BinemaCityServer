@@ -21,8 +21,8 @@ const validateID = async (objectID) => {
     return {success: true, isValid: true};
 }
 
-const validateGroupByData = async (groupBy) => {
-    if (!groupBy || !groupBy.field){
+const validateGroupByData = async (field) => {
+    if (!field){
         return {success: false, isValid: false, message: 'Missing groupby field'};
     }
     return {success: true, isValid: true};

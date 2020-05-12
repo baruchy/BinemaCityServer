@@ -4,8 +4,6 @@ const handleDBError = async (err, userMessage) => {
         result.isValid = false;
         if (userMessage) {
             result.message = userMessage;
-        } else {
-            result.message = userMessage;
         }
     } else {
         console.log(err);

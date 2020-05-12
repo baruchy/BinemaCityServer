@@ -6,7 +6,7 @@ const usersRouter = require('./routers/users.router');
 const ordersRouter = require('./routers/orders.router');
 const moviesRouter = require('./routers/movies.router');
 const categoriesRouter = require('./routers/categories.router');
-const mapsRouter = require('./routers/maps.router');
+const mapsRouter = require('./routers/locations.router');
 
 
 const dbOptions =
@@ -20,7 +20,7 @@ const dbUrl =  'mongodb://localhost:27017/binemacity';
 
 mongoose.connect(dbUrl, dbOptions).then(
     () => { console.log('Connected to DB'); },
-    err => { console.log('Connected to DB') }
+    err => { console.log('Error connecting to DB') }
 );
 
 const app = express();

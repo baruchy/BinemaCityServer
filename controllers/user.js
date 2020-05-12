@@ -1,7 +1,7 @@
 const User = require('../models/user');
 const Order = require('../models/order');
 const Movie = require('../models/movie');
-const Map = require('../models/map');
+const Location = require('../models/location');
 const brain = require('brain.js');
 
 
@@ -11,7 +11,7 @@ module.exports = {
         let password = req.body.password;
         User.findOne({email: email, password: password}, (err, user) => {
             if (err) {
-            	return res.status(500).send('Bad Request');
+                return res.status(500).send('Bad Request');
             }
             if (!user) {
                 return res.status(404).send('Incorrect username or password');
@@ -22,15 +22,15 @@ module.exports = {
     register: (req, res) => {
         let user = req.body;
         let u = new User(user);
-        
+
         var error = u.validateSync();
         if(error) {
-        	if (error.name == 'ValidationError') {
-            	let message = '';
+            if (error.name == 'ValidationError') {
+                let message = '';
                 for (let field in error.errors) {
                     message = message + error.errors[field].message + '\n';
                 }
-            	return res.status(404).send(message);
+                return res.status(404).send(message);
             }
         } else {
             User.findOne({email: req.body.email}, (err, user) => {
@@ -52,34 +52,34 @@ module.exports = {
     getUserOrders: (req, res) => {
         let id = req.params.id;
         Order.find({user: id}).populate('movies').exec((err, orders) => {
-        	if (err) {
-            	return res.status(500).send('Bad Request');
+            if (err) {
+                return res.status(500).send('Bad Request');
             }
             res.json(orders);
         });
     },
     list: (req, res) => {
         User.find({active: true}, (err, users) => {
-        	if (err) {
-            	return res.status(500).send('Bad Request');
+            if (err) {
+                return res.status(500).send('Bad Request');
             }
             res.json(users);
         });
     },
     maps: (req, res) => {
-        Map.find((err, maps) => {
-        	if (err) {
-            	return res.status(500).send('Bad Request');
+        Location.find((err, maps) => {
+            if (err) {
+                return res.status(500).send('Bad Request');
             }
             res.json(maps);
         });
     },
     setMaps: (maps) => {
         maps.forEach(m => {
-            let map = new Map({location:m});
+            let map = new Location({location:m});
             map.save((err, _map) => {
-            	if (err) {
-                	return res.status(500).send('Bad Request');
+                if (err) {
+                    return res.status(500).send('Bad Request');
                 }
                 return true;
             });
@@ -90,13 +90,13 @@ module.exports = {
         let password = req.body.password;
 
         User.findOne({_id: pId}, (err, user) => {
-        	if (err) {
-            	return res.status(500).send('Bad Request');
+            if (err) {
+                return res.status(500).send('Bad Request');
             }
             user.password = password;
             user.save((err, newUser) => {
-            	if (err) {
-                	return res.status(500).send('Bad Request');
+                if (err) {
+                    return res.status(500).send('Bad Request');
                 }
                 res.json(newUser);
             });
@@ -111,8 +111,8 @@ module.exports = {
                 }
             }]
         ).exec((err, users) => {
-        	if (err) {
-            	return res.status(500).send('Bad Request');
+            if (err) {
+                return res.status(500).send('Bad Request');
             }
             res.json(users);
         })
@@ -124,8 +124,8 @@ module.exports = {
 
         Order.find({user: id}).populate('movies').exec((err, orders) => {
 
-        	if (err) {
-            	return res.status(500).send('Bad Request');
+            if (err) {
+                return res.status(500).send('Bad Request');
             }
 
             orders.forEach((o) => {
@@ -139,8 +139,8 @@ module.exports = {
             let allMovies = [];
             Movie.find({}, (err, movies) => {
 
-            	if (err) {
-                	return res.status(500).send('Bad Request');
+                if (err) {
+                    return res.status(500).send('Bad Request');
                 }
                 allMovies = movies;
                 movies.forEach((p) => {

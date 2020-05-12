@@ -21,6 +21,16 @@ const handleList = async (res, daoService , successCode = 200) => {
     }
 }
 
+const handleQuery = async (req, res, daoService , successCode = 200) => {
+    try {
+        let queryResult = await daoService.query(req.query);
+        return responseHandler.populateResponse(res, queryResult);
+    } catch (e) {
+        console.log(e)
+        return responseHandler.populateInternalErrorResponse(res);
+    }
+}
+
 const handleGetById = async (req, res, daoService , successCode = 200) => {
     try {
         let queryResult = await daoService.findById(req.params.id);
@@ -43,7 +53,7 @@ const handleUpdate = async (req, res, daoService , successCode = 204) => {
 
 const handleRemoveById = async (req, res, daoService , successCode = 204) => {
     try {
-        let remove = await daoService.remove(req.params.id);
+        let remove = await daoService.removeById(req.params.id);
         return responseHandler.populateResponse(res, remove, successCode);
     } catch (e) {
         console.log(e)
@@ -53,7 +63,7 @@ const handleRemoveById = async (req, res, daoService , successCode = 204) => {
 
 const handleGroupBy = async (req, res, daoService , successCode = 200) => {
     try {
-        let result = await daoService.groupBy(req.body);
+        let result = await daoService.groupBy(req.params.field);
         return responseHandler.populateResponse(res, result, successCode);
     } catch (e) {
         console.log(e)
@@ -61,4 +71,4 @@ const handleGroupBy = async (req, res, daoService , successCode = 200) => {
     }
 }
 
-module.exports = {handleCreate, handleList, handleGetById, handleUpdate, handleRemove: handleRemoveById, handleGroupBy}
+module.exports = {handleCreate, handleList, handleGetById, handleQuery, handleUpdate, handleRemoveById, handleGroupBy}

@@ -13,13 +13,16 @@ const byId = async (req, res) => {
     return await apiHandler.handleGetById(req, res, categoryDao);
 }
 
+const query = async (req, res) => {
+    return await apiHandler.handleQuery(req, res, categoryDao);
+}
+
 const update = async (req, res) => {
     return await apiHandler.handleUpdate(req, res, categoryDao);
 }
 
 const removeById = async (req, res) => {
-    return await apiHandler.handleRemove(req, res, categoryDao);
+    return await apiHandler.handleRemoveById(req, res, categoryDao);
 }
 
-
-module.exports = { create, list, byId, update, remove: removeById };
+module.exports = {create, list, query, byId, update, removeById};

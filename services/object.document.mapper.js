@@ -1,5 +1,5 @@
-const mongooseValidator = require('../services/mongoose.validator');
-const errorHandler = require('../services/error.handler');
+const mongooseValidator = require('./mongoose.validator');
+const errorHandler = require('./error.handler');
 
 const create = async (dataObject, schemaConstructor, errorMessage) => {
     let schemaModel = new schemaConstructor(dataObject);
@@ -91,18 +91,18 @@ const remove = async (objectID, SchemaObject) => {
         });
 }
 
-const groupBy = async (groupBy, SchemaObject) => {
-    let result = await mongooseValidator.validateGroupByData(groupBy);
+const groupBy = async (field, SchemaObject) => {
+    let result = await mongooseValidator.validateGroupByData(field);
     if (!result.isValid) {
         return result;
     }
     return SchemaObject.aggregate(
-        [{
-            $group: {
-                _id:  '$' + groupBy.field,
+        [
+            {$group: {
+                _id:  '$' + field,
                 count:{$sum:1}
-                }
-            }]
+                }}
+            ]
         )
         .then((data) => {
             if (!data) {

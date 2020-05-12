@@ -14,10 +14,11 @@ var UserSchema = new Schema({
         type: String,
         required: [true, 'password is missing'],
         trim: true
-      },
+    },
     role: {type: String, default: 'user'},
     active: {type: Boolean, default: true},
-    gender: {type: String,
+    gender: {
+        type: String,
         required: [true, 'Gender is missing'],
         trim: true,
         default: 'Male'
