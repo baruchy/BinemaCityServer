@@ -6,12 +6,12 @@ const create = async (order) => {
     return objectDocumentMapper.create(order, Order);
 }
 
-const findById = async (orderID) => {
-    return objectDocumentMapper.findById(orderID, Order);
+const findById = async (orderID, populateData) => {
+    return objectDocumentMapper.findById(orderID, Order,'Failed fetching order' , populateData);
 }
 
-const query = async (orderQuery) => {
-    return objectDocumentMapper.query(orderQuery, Order, 'Order query is missing',);
+const query = async (orderQuery, populateData) => {
+    return objectDocumentMapper.query(orderQuery, Order, 'Order query is missing', populateData);
 }
 
 const update = async (orderID, category) => {

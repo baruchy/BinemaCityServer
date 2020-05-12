@@ -21,9 +21,9 @@ const handleList = async (res, daoService , successCode = 200) => {
     }
 }
 
-const handleQuery = async (req, res, daoService , successCode = 200) => {
+const handleQuery = async (req, res, daoService , successCode = 200, populateData) => {
     try {
-        let queryResult = await daoService.query(req.query);
+        let queryResult = await daoService.query(req.query, populateData);
         return responseHandler.populateResponse(res, queryResult);
     } catch (e) {
         console.log(e)
@@ -31,9 +31,9 @@ const handleQuery = async (req, res, daoService , successCode = 200) => {
     }
 }
 
-const handleGetById = async (req, res, daoService , successCode = 200) => {
+const handleGetById = async (req, res, daoService , successCode = 200, populateData) => {
     try {
-        let queryResult = await daoService.findById(req.params.id);
+        let queryResult = await daoService.findById(req.params.id, populateData);
         return responseHandler.populateResponse(res, queryResult);
     } catch (e) {
         console.log(e)

@@ -8,12 +8,12 @@ const create = async (movie) => {
     return objectDocumentMapper.create(movie, Movie);
 }
 
-const findById = async (movieID) => {
-    return objectDocumentMapper.findById(movieID, Movie, 'Failed fetching movie', ['category']);
+const findById = async (movieID, populateData = ['category']) => {
+    return objectDocumentMapper.findById(movieID, Movie, 'Failed fetching movie', populateData);
 }
 
-const query = async (movieQuery) => {
-    return objectDocumentMapper.query(movieQuery, Movie, 'Movie query is missing', ['category']);
+const query = async (movieQuery, populateData = ['category']) => {
+    return objectDocumentMapper.query(movieQuery, Movie, 'Movie query is missing', populateData);
 }
 
 const update = async (movieID, movie) => {

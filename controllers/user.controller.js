@@ -16,7 +16,7 @@ const byId = async (req, res) => {
 
 const getOrders = async (req, res) => {
     req.query = {user: req.params.id};
-    return await apiHandler.handleQuery(req, res, orderDao);
+    return await apiHandler.handleQuery(req, res, orderDao, 200,['movies']);
 }
 
 const query = async (req, res) => {
